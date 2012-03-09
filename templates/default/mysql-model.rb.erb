@@ -1,0 +1,78 @@
+# encoding: utf-8
+
+##
+# Backup Generated: mysql
+# Once configured, you can run the backup with the following command:
+#
+# $ backup perform -t mysql [-c <path_to_configuration_file>]
+#
+Backup::Model.new(:mysql, 'Description for mysql') do
+  ##
+  # Split [Splitter]
+  #
+  # Split the backup file in to chunks of 250 megabytes
+  # if the backup file size exceeds 250 megabytes
+  #
+  split_into_chunks_of <%= node[:backup][:mysql][:chunks] %>
+
+  ##
+  # MySQL [Database]
+  #
+  database MySQL do |db|
+    # To dump all databases, set db.name = :all (or leave blank)
+    db.name               = "<%= node[:backup][:mysql][:database] %>"
+    db.username           = "<%= node[:backup][:mysql][:username] %>"
+    db.password           = "<%= node[:backup][:mysql][:password] %>"
+    db.host               = "<%= node[:backup][:mysql][:host] %>"
+    db.port               = <%= node[:backup][:mysql][:port] %>
+    db.socket             = "<%= node[:backup][:mysql][:socket] %>"
+
+    <% if node[:backup][:mysql][:skip_tables] %>
+    db.skip_tables        = <%= node[:backup][:mysql][:skip_tables] %>
+    <% end %>
+
+    <% if node[:backup][:mysql][:only_tables] %>
+    db.only_tables        = <%= node[:backup][:mysql][:only_tables] %>
+    <% end %>
+
+    <% if node[:backup][:mysql][:additional_options] %>
+    db.additional_options = <%= node[:backup][:mysql][:additional_options] %>
+    <% end %>
+
+    # Optional: Use to set the location of this utility
+    #   if it cannot be found by name in your $PATH
+    # db.mysqldump_utility = "/opt/local/bin/mysqldump"
+  end
+
+  ##
+  # Rackspace Cloud Files [Storage]
+  #
+  # Available Auth URLs:
+  #
+  #  - https://auth.api.rackspacecloud.com     (US - Default)
+  #  - https://lon.auth.api.rackspacecloud.com (UK)
+  #
+  # Servicenet:
+  #
+  #  Set this to 'true' if Backup runs on a Rackspace server. It will avoid
+  #  transfer charges and it's more performant.
+  #
+  store_with CloudFiles do |cf|
+    cf.api_key    = <%= node[:backup][:cloudfiles][:api_key] %>
+    cf.username   = <%= node[:backup][:cloudfiles][:username] %>
+    cf.container  = <%= node[:backup][:cloudfiles][:container] %>
+    cf.path       = <%= node[:backup][:cloudfiles][:path] %>
+    cf.keep       = <%= node[:backup][:cloudfiles][:keep] %>
+    cf.auth_url   = <%= node[:backup][:cloudfiles][:auth_url] %>
+    cf.servicenet = <%= node[:backup][:cloudfiles][:servicenet] %>
+  end
+
+  ##
+  # Gzip [Compressor]
+  #
+  compress_with Gzip do |compression|
+    compression.best = true
+    compression.fast = false
+  end
+
+end
