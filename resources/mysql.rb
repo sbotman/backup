@@ -24,6 +24,7 @@ attribute :additional_options, :kind_of => [ Array, FalseClass ], :default => ["
 attribute :storage, :equal_to => [ "cloudfiles", "s3" ]
 attribute :cloudfiles_api_key, :kind_of => String
 attribute :cloudfiles_username, :kind_of => String
+attribute :cloudfiles_password, :kind_of => String
 attribute :cloudfiles_container, :kind_of => String
 attribute :cloudfiles_path, :kind_of => String, :default => "/backups"
 attribute :cloudfiles_keep, :kind_of => Integer, :default => 7
