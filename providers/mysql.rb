@@ -49,6 +49,6 @@ action :create do
   end
 
   execute "update crontab via whenever for #{new_resource.label}" do
-    command "whenever --update-crontab mysql-backup --load-file #{node[:backup][:dir]}/schedules/#{new_resource.label}-backup.rb"
+    command "whenever --update-crontab #{new_resource.label} --load-file #{node[:backup][:dir]}/schedules/#{new_resource.label}-backup.rb"
   end
 end
