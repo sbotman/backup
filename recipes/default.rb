@@ -1,3 +1,6 @@
+package "libxml2-dev"
+package "libxslt-dev"
+
 %w[ backup fog mail whenever ].each do |gem_name|
   gem_package gem_name
 end
