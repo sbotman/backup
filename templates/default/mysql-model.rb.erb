@@ -31,15 +31,15 @@ Backup::Model.new(:mysql, 'Description for mysql') do
     db.socket             = "<%= @socket %>"
 
     <% if @skip_tables %>
-    db.skip_tables        = <%= @skip_tables %>
+    db.skip_tables        = %w[ <%= @skip_tables.join(' ') %> ]
     <% end %>
 
     <% if @only_tables %>
-    db.only_tables        = <%= @only_tables %>
+    db.only_tables        = %w[ <%= @only_tables.join(' ') %> ]
     <% end %>
 
     <% if @additional_options %>
-    db.additional_options = <%= @additional_options %>
+    db.additional_options = %w[ <%= @additional_options.(' ') %> ]
     <% end %>
 
     # Optional: Use to set the location of this utility
@@ -63,12 +63,12 @@ Backup::Model.new(:mysql, 'Description for mysql') do
   #  transfer charges and it's more performant.
   #
   store_with CloudFiles do |cf|
-    cf.api_key    = <%= @cloudfiles_api_key %>
-    cf.username   = <%= @cloudfiles_username %>
-    cf.container  = <%= @cloudfiles_container %>
-    cf.path       = <%= @cloudfiles_path %>
+    cf.api_key    = "<%= @cloudfiles_api_key %>"
+    cf.username   = "<%= @cloudfiles_username %>"
+    cf.container  = "<%= @cloudfiles_container %>"
+    cf.path       = "<%= @cloudfiles_path %>"
     cf.keep       = <%= @cloudfiles_keep %>
-    cf.auth_url   = <%= @cloudfiles_auth_url %>
+    cf.auth_url   = "<%= @cloudfiles_auth_url %>"
     cf.servicenet = <%= @cloudfiles_servicenet %>
   end
   <% end %>
