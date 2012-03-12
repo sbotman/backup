@@ -5,7 +5,7 @@ package "libxslt-dev"
   gem_package gem_name
 end
 
-%w[ models schedule ].each do |dir|
+%w[ models schedules ].each do |dir|
   directory "#{node[:backup][:dir]}/#{dir}" do
     mode "0775"
     owner "root"
