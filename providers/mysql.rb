@@ -5,6 +5,7 @@ end
 
 action :create do
   template "#{node[:backup][:dir]}/models/#{new_resource.label}.rb" do
+    cookbook "backup"
     source "mysql-model.rb.erb"
     mode "0664"
     owner "root"
@@ -34,6 +35,7 @@ action :create do
   end
 
   template "#{node[:backup][:dir]}/schedules/#{new_resource.label}-backup.rb" do
+    cookbook "backup"
     source "schedule.rb.erb"
     mode "0664"
     owner "root"
