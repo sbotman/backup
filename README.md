@@ -12,7 +12,7 @@ Minimal options to get going.
 ``` ruby
 backup_mysql "myapp-mysql" do
   # chunks 250
-  # interval "1.day"
+  # interval "1.day", :at => "12:00 am"
 
   # To dump all databases, set database = :all (or leave blank)
   database "myapp_production"

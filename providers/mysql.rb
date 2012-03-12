@@ -41,6 +41,7 @@ action :create do
 
     variables(
       :interval => new_resource.interval,
+      :run_at   => new_resource.run_at,
       :trigger  => new_resource.label
     )
   end

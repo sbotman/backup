@@ -3,7 +3,12 @@ actions :create
 attribute :label, :kind_of => String, :name_attribute => true, :regex => /[0-9a-zA-Z_-]+/
 
 attribute :chunks, :kind_of => Integer, :default => 250
-attribute :interval, :kind_of => String, :default => "1.day"
+
+# These values are passed through to whenever's `every` method:
+# every "1.day", :at => "12:00 am"
+# https://github.com/javan/whenever
+attribute :interval, :default => "1.day"
+attribute :run_at, :default => "12:00 am"
 
 # To dump all databases, set database = :all (or leave blank)
 attribute :database, :kind_of => [ String, FalseClass ]
