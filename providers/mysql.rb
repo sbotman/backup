@@ -12,6 +12,7 @@ action :create do
     group "root"
 
     variables(
+      :label              => new_resource.label,
       :chunks             => new_resource.chunks,
       :database           => new_resource.database,
       :username           => new_resource.username,

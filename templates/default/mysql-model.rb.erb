@@ -6,7 +6,7 @@
 #
 # $ backup perform -t mysql [-c <path_to_configuration_file>]
 #
-Backup::Model.new(:mysql, 'Description for mysql') do
+Backup::Model.new(:'<%= @label %>', 'Description for mysql') do
   ##
   # Split [Splitter]
   #
@@ -39,7 +39,7 @@ Backup::Model.new(:mysql, 'Description for mysql') do
     <% end %>
 
     <% if @additional_options %>
-    db.additional_options = %w[ <%= @additional_options.(' ') %> ]
+    db.additional_options = %w[ <%= @additional_options.join(' ') %> ]
     <% end %>
 
     # Optional: Use to set the location of this utility
