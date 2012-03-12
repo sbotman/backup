@@ -28,4 +28,4 @@ attribute :cloudfiles_container, :kind_of => String
 attribute :cloudfiles_path, :kind_of => String, :default => "/backups"
 attribute :cloudfiles_keep, :kind_of => Integer, :default => 7
 attribute :cloudfiles_auth_url, :kind_of => String, :default => "https://auth.api.rackspacecloud.com"
-attribute :cloudfiles_servicenet, :kind_of => [ TrueClass, FalsClass ], :default => true
+attribute :cloudfiles_servicenet, :kind_of => [ TrueClass, FalseClass ], :default => true
