@@ -27,6 +27,7 @@ action :create do
       :cloudfiles_api_key    => new_resource.cloudfiles_api_key,
       :cloudfiles_username   => new_resource.cloudfiles_username,
       :cloudfiles_password   => new_resource.cloudfiles_password,
+      :cloudfiles_container  => new_resource.cloudfiles_container,
       :cloudfiles_path       => new_resource.cloudfiles_path,
       :cloudfiles_keep       => new_resource.cloudfiles_keep,
       :cloudfiles_auth_url   => new_resource.cloudfiles_auth_url,
