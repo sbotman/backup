@@ -14,7 +14,7 @@ end
   end
 end
 
-template "#{node[:backup][:dir]}/client.rb" do
+template "#{node[:backup][:dir]}/config.rb" do
   source "config.rb.erb"
   mode "0664"
   owner "root"
