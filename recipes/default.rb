@@ -1,4 +1,4 @@
-%w[ backup for mail whenever ].each do |gem_name|
+%w[ backup fog mail whenever ].each do |gem_name|
   gem_package gem_name
 end
 
