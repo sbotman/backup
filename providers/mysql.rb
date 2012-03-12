@@ -28,7 +28,7 @@ action :create do
       :cloudfiles_password   => new_resource.cloudfiles_password,
       :cloudfiles_path       => new_resource.cloudfiles_path,
       :cloudfiles_keep       => new_resource.cloudfiles_keep,
-      :cloudfiles_auth_url   => new_resource.auth_url,
+      :cloudfiles_auth_url   => new_resource.cloudfiles_auth_url,
       :cloudfiles_servicenet => new_resource.cloudfiles_servicenet
     )
   end
