@@ -6,14 +6,14 @@
 #
 # $ backup perform -t mysql [-c <path_to_configuration_file>]
 #
-Backup::Model.new(:'<%= @label %>', 'Description for mysql') do
+Backup::Model.new(:'<%= @resource.label %>', 'Description for database') do
   ##
   # Split [Splitter]
   #
   # Split the backup file in to chunks of 250 megabytes
   # if the backup file size exceeds 250 megabytes
   #
-  split_into_chunks_of <%= @chunks %>
+  split_into_chunks_of <%= @resource.chunks %>
 
 <% case @resource.database %>
 <% when "mysql" then %>
@@ -53,15 +53,25 @@ Backup::Model.new(:'<%= @label %>', 'Description for mysql') do
   # MongoDB [Database]
   #
   database MongoDB do |db|
-    db.name               = <%= @resource.mongodb_database_name %>"my_database_name"
-    db.username           = <%= @resource.mongodb_username %>
-    db.password           = <%= @resource.mongodb_password %>
-    db.host               = <%= @resource.mongodb_host %>
+   # To dump all databases, set db.name = :all (or leave blank)
+   <% if @resource.mongodb_database_name %>
+   db.name               = "<%= @resource.mongodb_database_name %>"
+   <% end %>
+    db.username           = "<%= @resource.mongodb_username %>"
+    db.password           = "<%= @resource.mongodb_password %>"
+    db.host               = "<%= @resource.mongodb_host %>"
     db.port               = <%= @resource.mongodb_port %>
-    db.ipv6               = <%= @resource.mongodb_database_name %>
-    db.only_collections   = <%= @resource.mongodb_ipv6 %>
-    db.additional_options = <%= @resource.mongodb_additional_options %>
+    db.ipv6               = <%= @resource.mongodb_ipv6 %>
     db.lock               = <%= @resource.mongodb_lock %>
+
+    <% if @resource.mongodb_only_collections %>
+    db.only_collections = %w[ <%= @resource.mongodb_only_collections.join(' ') %> ]
+    <% end %>
+   
+    <% if @resource.mongodb_additional_options %>
+    db.additional_options = %w[ <%= @resource.mongodb_additional_options.join(' ') %> ]
+    <% end %>
+
     # Optional: Use to set the location of these utilities
     #   if they cannot be found by their name in your $PATH
     # db.mongodump_utility = "/opt/local/bin/mongodump"
