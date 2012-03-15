@@ -21,7 +21,7 @@ attribute :mysql_port, :kind_of => Integer, :default => 3306
 attribute :mysql_socket, :kind_of => String, :default => "/tmp/mysql.sock"
 attribute :mysql_skip_tables, :kind_of => [ Array, FalseClass ], :default => false # ["skip", "these", "tables"]
 attribute :mysql_only_tables, :kind_of => [ Array, FalseClass ], :default => false # ["only", "these" "tables"]
-attribute :mysql_additional_options, :kind_of => [ Array, FalseClass ], :default => ["--quick", "--single-transaction"]
+attribute :mysql_additional_options, :kind_of => [ Array, FalseClass ], :default => [ "--quick", "--single-transaction" ]
 
 # To dump all databases, set database_name = :all (or leave blank)
 attribute :mongodb_database_name, :kind_of => [ String, FalseClass ]
@@ -31,7 +31,7 @@ attribute :mongodb_host, :kind_of => String, :default => "localhost"
 attribute :mongodb_port, :kind_of => Integer, :default => 27017
 attribute :mongodb_ipv6, :kind_of => FalseClass, :default => false
 attribute :mongodb_only_collections, :kind_of => [ Array, FalseClass ], :default => false # ["only", "these" "tables"]
-attribute :mongodb_additional_options, :kind_of => [ Array, FalseClass ], :default => false 
+attribute :mongodb_additional_options, :kind_of => [ Array, FalseClass ], :default => [ "--oplog" ]
 attribute :mongodb_lock, :kind_of => FalseClass, :default => false
 
 attribute :storage, :equal_to => [ "cloudfiles", "s3" ]
