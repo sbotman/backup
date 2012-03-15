@@ -26,3 +26,15 @@ backup_mysql "myapp-mysql" do
   cloudfiles_container "my_container"
 end
 ```
+
+## Notes
+
+* make sure to add depends on referring project cookbook
+* add to mongo or mysql recipe in project cookbook:
+```ruby
+# Only run database backup recipe on primary database node                                                                                                                                                                                                                                                  
+if node.name =~ /01$/
+  Chef::Log.info "Running database backup recipe"
+    include_recipe "target-tgtapps::database-backup"
+	end
+```
